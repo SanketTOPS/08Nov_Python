@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Showdata</title>
+</head>
+<body style="background-color: rgb(153, 195, 90);">
+    <center><h1 style="font-family: cursive;color: rgb(4, 4, 4);">Showdata</h1></center>
+    <hr>
+    <!-- {{data}} -->
+
+    <!-- {% for i in data %}
+    {{i.firstname}}
+    {{i.lastname}}
+    {{i.email}}
+    {{i.password}}
+    {% endfor %} -->
+
+    <table border="2">
+        <tr>
+            <th>ID</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>DOB</th>
+            <th>Mobile</th>
+            <th>Address</th>
+        </tr> 
+        {% for i in data %}
+        <tr>
+            <td>{{i.id}}</td>
+            <td>{{i.firstname}}</td>
+            <td>{{i.lastname}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.password}}</td>
+            <td>{{i.dob}}</td>
+            <td>{{i.mobile}}</td>
+            <td>{{i.address}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>
