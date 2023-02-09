@@ -10,4 +10,7 @@ class userinfo(models.Model):
     mobile=models.BigIntegerField()
     address=models.TextField()
 
+    """def __str__(self) -> str:
+        return self.firstname"""
+
 
