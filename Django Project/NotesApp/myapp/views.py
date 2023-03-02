@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .forms import signupForm
+from .forms import signupForm,notesForm
 from .models import user_signup
 from django.contrib.auth import logout
 
@@ -18,10 +18,13 @@ def index(request):
             unm=request.POST['username']
             pas=request.POST['password']
 
+            uid=user_signup.objects.get(username=unm)
+            print("Current User:",uid.id)
             user=user_signup.objects.filter(username=unm,password=pas)
             if user: #true
                 print("Login Successfully!")
                 request.session['user']=unm #create session
+                request.session['userid']=uid.id
                 return redirect('notes')
             else:
                 print("Error! Login fail")
@@ -32,13 +35,23 @@ def about(request):
 
 def notes(request):
     user=request.session.get('user')
+    if request.method=='POST':
+        newnotes=notesForm(request.POST,request.FILES)
+        if newnotes.is_valid():
+            newnotes.save()
+            print("Your notes has been uploaded!")
+        else:
+            print(newnotes.errors)
     return render(request,'notes.html',{'user':user})
 
 def contact(request):
     return render(request,'contact.html')
     
 def profile(request):
-    return render(request,'profile.html')
+    user=request.session.get('user')
+    uid=request.session.get('userid')
+    cuser=user_signup.objects.get(id=uid)
+    return render(request,'profile.html',{'user':user,'cuser':user_signup.objects.get(id=uid)})
 
 def userlogout(request):
     logout(request)
