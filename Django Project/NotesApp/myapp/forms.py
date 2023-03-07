@@ -11,3 +11,9 @@ class notesForm(forms.ModelForm):
     class Meta:
         model=mynotes
         fields='__all__'
+    
+    
+class updateForm(forms.ModelForm):
+    class Meta:
+        model=user_signup
+        fields=['firstname','lastname','username','password','email','city','state','mobile']

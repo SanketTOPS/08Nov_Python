@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .forms import signupForm,notesForm
+from .forms import signupForm,notesForm,updateForm
 from .models import user_signup
 from django.contrib.auth import logout
 
@@ -51,6 +51,14 @@ def profile(request):
     user=request.session.get('user')
     uid=request.session.get('userid')
     cuser=user_signup.objects.get(id=uid)
+    if request.method=='POST':
+        updateuser=updateForm(request.POST)
+        if updateuser.is_valid():
+            updateuser=updateForm(request.POST,instance=cuser)
+            updateuser.save()
+            print("Your profile has been updated!")
+        else:
+            print(updateuser.errors)
     return render(request,'profile.html',{'user':user,'cuser':user_signup.objects.get(id=uid)})
 
 def userlogout(request):
