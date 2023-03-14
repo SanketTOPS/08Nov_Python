@@ -38,7 +38,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myapp',
+
+    #allauth
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
+    
 ]
+
+#allauth
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -68,6 +80,12 @@ TEMPLATES = [
     },
 ]
 
+#allauth
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
 WSGI_APPLICATION = 'NotesApp.wsgi.application'
 
 
@@ -77,7 +95,7 @@ WSGI_APPLICATION = 'NotesApp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'notesappdb',
+        'NAME': 'newnotesappdb',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': '127.0.0.1',
@@ -140,3 +158,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = "01decdmbatch@gmail.com"
 EMAIL_HOST_PASSWORD = "udrfbhsujqselnla" #app password
 
+
+# Login Redirect
+LOGIN_REDIRECT_URL='/'
