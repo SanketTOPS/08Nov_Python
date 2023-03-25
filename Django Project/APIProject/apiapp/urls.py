@@ -7,4 +7,5 @@ urlpatterns = [
     path('getid/<int:id>/',views.getid),    
     path('saveuser/',views.saveuser),
     path('deleteuser/<int:id>/',views.deleteuser),
+    path('updateuser/<int:id>/',views.updateuser),
 ]

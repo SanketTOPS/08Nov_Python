@@ -48,8 +48,24 @@ def deleteuser(request,id):
         userInfo.delete(stid)
         return Response(status=status.HTTP_202_ACCEPTED)
 
-
-
+@api_view(['GET','PUT'])
+def updateuser(request,id):
+    try:
+        stid=userInfo.objects.get(id=id)
+    except userInfo.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    if request.method=='GET':
+        userserial=userSerialziers(stid)
+        return Response(userserial.data)
+    if request.method=='PUT':
+        userserial=userSerialziers(data=request.data,instance=stid)
+        if userserial.is_valid():
+            userserial.save()
+            return Response(status=status.HTTP_202_ACCEPTED)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+    
+    
 
 
 
